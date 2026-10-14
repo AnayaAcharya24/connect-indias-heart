@@ -1,9 +1,12 @@
+import { AccountEditProfile } from "@/components/site/AccountEditProfile";
+import { AccountInformation } from "@/components/site/AccountInformation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -12,6 +15,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
 
 function NotFoundComponent() {
   return (
@@ -39,6 +44,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
+    document.documentElement.classList.remove("hero-pending");
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
@@ -78,14 +84,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { title: "SAC COMMUNITY" },
+      { name: "description", content: "One platform. Every event. Across India." },
     ],
     links: [
       {
@@ -93,6 +93,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -103,8 +106,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html:
+              'html.hero-pending body::before{content:"";position:fixed;inset:0;background:#0a0908;z-index:2147483000;pointer-events:none}html.hero-pending footer{visibility:hidden}',
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              '(function(){try{if(location.pathname!=="/")return;var d=document.documentElement;d.classList.add("hero-pending");history.scrollRestoration="manual";window.scrollTo(0,0);setTimeout(function(){d.classList.remove("hero-pending")},3000)}catch(e){}})();',
+          }}
+        />
         <HeadContent />
       </head>
       <body>
@@ -117,11 +132,27 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  // Explore-only: no footer (endless feed) and the Explore mobile top bar replaces the site header on phones.
+  const onExplore = useRouterState({ select: (s) => s.location.pathname.startsWith("/explore") });
+  // Profile (/u/) and account (/account/) pages are app-like too, so they skip the footer as well.
+  const noFooter = useRouterState({ select: (s) => /^\/(explore|u\/|account\/|athletes\/?$|community-profile$|community\/|my-sac)/.test(s.location.pathname) });
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      {onExplore ? (
+        <div className="max-md:hidden">
+          <Header />
+        </div>
+      ) : (
+        <Header />
+      )}
+      <main>
+        <Outlet />
+      </main>
+      {!noFooter && <Footer />}
+      <AccountEditProfile />
+      <AccountInformation />
     </QueryClientProvider>
   );
 }
