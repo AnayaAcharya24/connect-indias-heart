@@ -103,14 +103,22 @@ export function Hero() {
       r2 = requestAnimationFrame(() => document.documentElement.classList.remove("hero-pending"));
     });
     // fallback; the CSS animation started on first paint and ends at ~1.75s
-    const t = window.setTimeout(endCurtain, 2100);
-    // preload the other two figures
-    SL.slice(1).forEach((s) => {
-      const im = new Image();
-      im.src = s.img;
-    });
+    const phone = matchMedia("(max-width:700px),(max-aspect-ratio:1/1)").matches;
+    const t = window.setTimeout(endCurtain, phone ? 3300 : 2100);
+    // preload the other two figures (on phones only after the curtain, when idle)
+    const preload = () =>
+      SL.slice(1).forEach((s) => {
+        const im = new Image();
+        im.src = s.img;
+      });
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
+    const t2 = window.setTimeout(
+      () => (w.requestIdleCallback ? w.requestIdleCallback(preload, { timeout: 1500 }) : preload()),
+      phone ? 3100 : 0,
+    );
     return () => {
       window.clearTimeout(t);
+      window.clearTimeout(t2);
       history.scrollRestoration = "auto";
     };
   }, []);
@@ -335,6 +343,7 @@ export function Hero() {
           <i className="a" />
           <i className="b" onAnimationEnd={endCurtain} />
           <u>SAC</u>
+          <b />
         </div>
       )}
       <div className="sh-track">
