@@ -133,8 +133,7 @@ export function Header() {
             SAC <span className="text-primary">COMMUNITY</span>
           </Link>
           <div className="ml-auto flex items-center gap-3">
-            {/* On Explore (tablet and up) search lives in the Explore rail instead. */}
-            <div className={onExplore ? "contents md:hidden" : "contents"}>
+            <div className="contents">
               <SearchBar />
             </div>
             <button aria-label="Location" className="hidden h-10 md:flex items-center gap-1.5 px-2 text-[13px] font-semibold opacity-85 hover:opacity-100">
@@ -147,19 +146,6 @@ export function Header() {
                   <MyAvatar size={32} />
                 </span>
               );
-              const shell = kind === "mobile"
-                ? "grid h-11 w-11 shrink-0 place-items-center md:hidden"
-                : onExplore
-                  ? "hidden"
-                  : "hidden h-10 w-10 shrink-0 place-items-center md:grid";
-              // Already on Explore: same avatar, no link, so a click cannot re-navigate or reload it.
-              if (onExplore) {
-                return (
-                  <span key={kind} aria-label="Explore" aria-current="page" className={shell}>
-                    {avatar}
-                  </span>
-                );
-              }
               const wrap = kind === "mobile" ? "relative shrink-0 md:hidden" : "relative hidden shrink-0 md:block";
               return (
                 <span key={kind} className={wrap}>

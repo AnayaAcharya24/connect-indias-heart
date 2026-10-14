@@ -132,21 +132,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  // Explore-only: no footer (endless feed) and the Explore mobile top bar replaces the site header on phones.
-  const onExplore = useRouterState({ select: (s) => s.location.pathname.startsWith("/explore") });
   // Profile (/u/) and account (/account/) pages are app-like too, so they skip the footer as well.
   const noFooter = useRouterState({ select: (s) => /^\/(explore|u\/|account\/|athletes\/?$|community-profile$|community\/|my-sac)/.test(s.location.pathname) });
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      {onExplore ? (
-        <div className="max-md:hidden">
-          <Header />
-        </div>
-      ) : (
-        <Header />
-      )}
+      <Header />
       <main>
         <Outlet />
       </main>
