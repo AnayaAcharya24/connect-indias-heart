@@ -13,6 +13,18 @@ export const heroCriticalCss = `
 @keyframes sh-ca{to{transform:translateX(-101%)}}
 @keyframes sh-cb{to{transform:translateX(101%)}}
 @keyframes sh-cm{0%{opacity:0}40%{opacity:1}100%{opacity:0}}
+.sh-cur b{display:none}
+@media(max-width:700px),(max-aspect-ratio:1/1){
+.sac-hero-root .sh-cur i{will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;contain:layout paint;transform:translate3d(0,0,0);z-index:1}
+.sac-hero-root .sh-cur .a{animation:sh-ma 1.6s cubic-bezier(.65,0,.35,1) 1.4s forwards}
+.sac-hero-root .sh-cur .b{animation:sh-mb 1.6s cubic-bezier(.65,0,.35,1) 1.4s forwards}
+.sac-hero-root .sh-cur u{z-index:3;color:rgba(246,242,234,.95);text-shadow:0 0 24px rgba(233,180,58,.35);font:400 clamp(56px,18vw,84px)/1 Anton,"Arial Narrow",Impact,sans-serif;text-transform:uppercase;letter-spacing:.28em;text-indent:.28em;opacity:0;animation:sh-mw 1.35s linear 0s both}
+.sac-hero-root .sh-cur b{display:block;position:absolute;z-index:3;left:50%;top:calc(50% + clamp(56px,18vw,84px)*.62);width:calc(clamp(56px,18vw,84px)*2.6);height:1px;margin-left:calc(clamp(56px,18vw,84px)*-1.3);background:#f0c24b;transform:scaleX(0);animation:sh-ml 1.4s cubic-bezier(.65,0,.35,1) .1s both}
+}
+@keyframes sh-ma{to{transform:translate3d(-101%,0,0)}}
+@keyframes sh-mb{to{transform:translate3d(101%,0,0)}}
+@keyframes sh-mw{0%{opacity:0}26%{opacity:1}78%{opacity:1}100%{opacity:0}}
+@keyframes sh-ml{0%{transform:scaleX(0);opacity:1}40%{transform:scaleX(1);opacity:1}80%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
 @media(prefers-reduced-motion:reduce){.sh-cur{display:none}}
 `;
 
