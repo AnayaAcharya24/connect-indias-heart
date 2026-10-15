@@ -21,6 +21,25 @@ import av3 from "@/assets/avatars/a3.jpg";
 import av4 from "@/assets/avatars/a4.jpg";
 import av5 from "@/assets/avatars/a5.jpg";
 import av8 from "@/assets/avatars/a8.jpg";
+// AI-generated sample images of fictional people; replace with real photos when real accounts exist.
+import smp0 from "@/assets/avatars/sample/kavya-reddy.webp";
+import smp1 from "@/assets/avatars/sample/rohan-pillai.webp";
+import smp2 from "@/assets/avatars/sample/zoya-khan.webp";
+import smp3 from "@/assets/avatars/sample/devika-warrier.webp";
+import smp4 from "@/assets/avatars/sample/imran-sheikh.webp";
+import smp5 from "@/assets/avatars/sample/meenakshi-iyer.webp";
+import smp6 from "@/assets/avatars/sample/faisal-qureshi.webp";
+import smp7 from "@/assets/avatars/sample/priyanka-sen.webp";
+import smp8 from "@/assets/avatars/sample/dhruv-malhotra.webp";
+import smp9 from "@/assets/avatars/sample/malabarfolk.webp";
+import smp10 from "@/assets/avatars/sample/stagecraft.webp";
+import smp11 from "@/assets/avatars/sample/netravatistrikers.webp";
+import smp12 from "@/assets/avatars/sample/greenfieldsports.webp";
+import smp13 from "@/assets/avatars/sample/lakeshorearts.webp";
+import smp14 from "@/assets/avatars/sample/northgateesports.webp";
+import smp15 from "@/assets/avatars/sample/harbourviewculture.webp";
+import smp16 from "@/assets/avatars/sample/stagedoor.webp";
+import smp17 from "@/assets/avatars/sample/southernrhythm.webp";
 
 // Placeholder Explore content — shaped to be swapped for backend data later.
 export type ExploreComment = { id: string; author: string; text: string };
@@ -188,6 +207,25 @@ const avatarMap: Record<string, string> = {
   colourrun: catFestivals, "colour run collective": catFestivals,
   lannight: catGaming, "lan night hyderabad": catGaming,
   weekendleague: catSports, "weekend league": catSports,
+  // AI-generated sample images of fictional people; replace with real photos when real accounts exist.
+  "kavya.reddy": smp0, "kavya reddy": smp0,
+  "rohan.pillai": smp1, "rohan pillai": smp1,
+  "zoya.khan": smp2, "zoya khan": smp2,
+  "devika.warrier": smp3, "devika warrier": smp3,
+  "imran.sheikh": smp4, "imran sheikh": smp4,
+  "meenakshi.iyer": smp5, "meenakshi iyer": smp5,
+  "faisal.qureshi": smp6, "faisal qureshi": smp6,
+  "priyanka.sen": smp7, "priyanka sen": smp7,
+  "dhruv.malhotra": smp8, "dhruv malhotra": smp8,
+  "malabarfolk": smp9, "malabar folk collective": smp9,
+  "stagecraft": smp10, "stagecraft theatre troupe": smp10,
+  "netravatistrikers": smp11, "netravati strikers": smp11,
+  "greenfieldsports": smp12, "greenfield institute sports council": smp12,
+  "lakeshorearts": smp13, "lakeshore college arts society": smp13,
+  "northgateesports": smp14, "northgate university esports society": smp14,
+  "harbourviewculture": smp15, "harbourview college cultural council": smp15,
+  "stagedoor": smp16, "stage door productions": smp16,
+  "southernrhythm": smp17, "southern rhythm events": smp17,
   "arjun.k": av4, "maya_r": av5, "neha.s": av8, "rhea.art": av3, "dev.music": av2,
 };
 
