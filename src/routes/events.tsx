@@ -61,7 +61,7 @@ function EventsPage() {
 
   return (
     <>
-      <PageHero eyebrow="India → State → City → Area → Venue" title="All events" text="Every sport, stage and celebration — filtered your way." />
+      <PageHero eyebrow="India → State → City → Area → Venue" title="All events" text="Every sport, stage and celebration — filtered your way." compact />
       <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-14 md:px-8 lg:grid-cols-[280px_1fr]">
         <aside className="space-y-6 lg:sticky lg:top-20 lg:self-start">
           <input defaultValue={s.q} onKeyDown={(e) => e.key === "Enter" && set({ q: e.currentTarget.value || undefined })} placeholder="Search events, artists, sports..." className={sel} />
